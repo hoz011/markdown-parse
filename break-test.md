@@ -1,3 +1,3 @@
 ## Heading
 
-[This is a link](hello.com
+[This is a link]
