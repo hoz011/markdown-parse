@@ -16,7 +16,14 @@ public class MarkdownParse {
             if (markdown.contains(s)) {i++;}
         }
         if (i == 3) {
-            int nextOpenBracket = markdown.indexOf("[", currentIndex);
+            int index = markdown.indexOf("[", currentIndex);
+            int nextOpenBracket;
+            if (String.valueOf(markdown.charAt(index-1)).equals("!")) {
+                nextOpenBracket = markdown.indexOf("[", index+1);
+                if (nextOpenBracket == -1) {return toReturn;}
+            } else {
+                nextOpenBracket = index;
+            }
             while(currentIndex < markdown.length()) {
                 System.out.println(String.valueOf(currentIndex) + ", ");
                 int nextCloseBracket = markdown.indexOf("]", nextOpenBracket);
@@ -24,7 +31,14 @@ public class MarkdownParse {
                 int closeParen = markdown.indexOf(")", openParen);
                 toReturn.add(markdown.substring(openParen + 1, closeParen));
                 currentIndex = closeParen + 1;
-                nextOpenBracket = markdown.indexOf("[", currentIndex);
+                index = markdown.indexOf("[", currentIndex);
+                if (index != -1) {
+                    if (String.valueOf(markdown.charAt(index-1)).equals("!")) {
+                        nextOpenBracket = markdown.indexOf("[", index);
+                    } else {
+                        nextOpenBracket = index;
+                    }
+                } else { break; }
                 if (nextOpenBracket == -1) { break; }
                 System.out.println(String.valueOf(currentIndex) + ", ");
             }
