@@ -41,6 +41,7 @@ public class MarkdownParse {
                 } else { break; }
                 if (nextOpenBracket == -1) { break; }
                 System.out.println(String.valueOf(currentIndex) + ", ");
+                System.out.println("hello");
             }
         }
         return toReturn;
